@@ -1,10 +1,10 @@
-import { LayoutDashboard, Menu, Package, ShoppingCart, Sofa, X } from 'lucide-react';
+import { LayoutDashboard, Menu, ShoppingCart, Sofa, X, UtensilsCrossed } from 'lucide-react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const menuItems = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/products', icon: Package, label: 'Sản phẩm' },
+  { to: '/dishes', icon: UtensilsCrossed, label: 'Món ăn' },
   { to: '/orders', icon: ShoppingCart, label: 'Đơn hàng' },
   { to: '/tables', icon: Sofa, label: 'Bàn ăn' },
 ]

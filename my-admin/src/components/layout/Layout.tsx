@@ -1,13 +1,10 @@
 import { Outlet } from "react-router-dom"
 import Header from "./Header"
 import Sidebar from "./Sidebar"
-import useDarkMode from "../../hooks/useDarkMode"
 
 export default function Layout() {
-  const { darkMode } = useDarkMode()
-
   return (
-    <div className={darkMode ? 'dark' : ''}>
+    <div>
       <div className="d-flex">
         <Sidebar />
         <div className="flex-grow-1" style={{ marginLeft: 'var(--sidebar-width)' }}>
