@@ -1,10 +1,7 @@
-import { Bell, Moon, Search, Sun } from "lucide-react"
-import useDarkMode from "../../hooks/useDarkMode"
+import { Bell, Search } from "lucide-react"
 import "../../styles/Header.css"
 export default function Header() {
   {
-    const { darkMode, toggleDarkMode } = useDarkMode()
-
     return (
       <header className="bg-white dark:bg-gray-800 shadow-sm border-bottom">
         <div className="d-flex justify-content-between align-items-center p-3 px-4">
@@ -25,10 +22,6 @@ export default function Header() {
               </span>
             </button>
 
-            <button onClick={toggleDarkMode} className="btn btn-link">
-              {darkMode ? <Sun size={22} /> : <Moon size={22} />}
-            </button>
-
             <img
               src="https://i.pravatar.cc/40"
               alt="Admin"
@@ -39,5 +32,5 @@ export default function Header() {
         </div>
       </header>
     )
-  }
+}
 }
