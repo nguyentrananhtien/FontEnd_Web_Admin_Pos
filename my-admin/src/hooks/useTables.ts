@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { getAllTables } from "../api/DiningTables.service";
-import type { DiningTableResponse } from "../props/DiningTables";
+import type { DiningTableResponse } from "../props/DiningTables1";
 
 export const useTables = () => {
   const [tables, setTables] = useState<DiningTableResponse[]>([]);

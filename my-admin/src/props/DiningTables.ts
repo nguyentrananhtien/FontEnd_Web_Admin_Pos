@@ -5,7 +5,6 @@ export interface DiningTableResponse {
   area: string;
   status: TableStatus;
   notes: string | null;
-  createdAt: string;
 }
 export type TableStatus = "EMPTY" | "OCCUPIED";
 

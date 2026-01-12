@@ -1,6 +1,6 @@
 import { Button, Form, Modal } from "react-bootstrap";
-import { useTableModal } from "../../hooks/useTableModal";
-import type { DiningTableResponse } from "../../props/DiningTables";
+import { useTableModal } from "../../../hooks/useTableModal";
+import type { DiningTableResponse } from "../../../props/DiningTables";
 
 interface Props {
   show: boolean;

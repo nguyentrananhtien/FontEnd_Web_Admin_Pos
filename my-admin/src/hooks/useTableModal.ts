@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import type { DiningTableResponse } from "../props/DiningTables";
+import type { DiningTableResponse } from "../props/DiningTables1";
 import { deleteTable, updateTable } from "../api/DiningTables.service";
 
 export const useTableModal = (
@@ -19,13 +19,13 @@ export const useTableModal = (
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleUpdate = async () =>{
+  const handleUpdate = async () => {
     await updateTable(table.tableId, form);
     onSuccess();
   };
 
   const handleDelete = async () => {
-    if(!window.confirm("Bạn có chắc muốn xóa bàn này không ?")) return;
+    if (!window.confirm("Bạn có chắc muốn xóa bàn này không ?")) return;
     await deleteTable(table.tableId);
     onSuccess();
   };

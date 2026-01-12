@@ -1,7 +1,7 @@
 import { Badge, Card } from "react-bootstrap";
-import type { DiningTableResponse } from "../../props/DiningTables";
 import { useState } from "react";
 import { UpdateTableModal } from "./UpdateTableModal";
+import type { DiningTableResponse } from "../../../props/DiningTables";
 
 interface Props {
   table: DiningTableResponse;
