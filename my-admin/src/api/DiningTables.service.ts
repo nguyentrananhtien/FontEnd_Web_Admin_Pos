@@ -1,6 +1,5 @@
 import axios from "axios";
 import type { DiningTableResponse, DiningTablesRequest } from "../props/DiningTables";
-
 const BASE_API_URL = 'http://localhost:8080/api';
 
 export const getAllTables = async (): Promise<DiningTableResponse[]> => {

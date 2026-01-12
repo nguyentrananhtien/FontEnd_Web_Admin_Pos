@@ -1,4 +1,4 @@
-import { LayoutDashboard, Menu, ShoppingCart, Sofa, X, UtensilsCrossed } from 'lucide-react';
+import { CalendarDays, LayoutDashboard, Menu, ShoppingCart, Sofa, X, UtensilsCrossed } from 'lucide-react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -7,6 +7,7 @@ const menuItems = [
   { to: '/dishes', icon: UtensilsCrossed, label: 'Món ăn' },
   { to: '/orders', icon: ShoppingCart, label: 'Đơn hàng' },
   { to: '/tables', icon: Sofa, label: 'Bàn ăn' },
+  { to: '/reservations', icon: CalendarDays, label: 'Đơn đặt bàn' },
 ]
 
 export default function Sidebar() {
