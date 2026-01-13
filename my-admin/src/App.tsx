@@ -4,7 +4,7 @@ import Layout from './components/layout/Layout'
 import Dashboard from './pages/Dashboard'
 import Orders from './pages/Orders'
 import Tables from './pages/Tables'
-import {Dishes} from "./pages/Dishes.tsx";
+import {Dishes} from './pages/Dishes';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route path='orders' element={<Orders />} />
           <Route path='tables' element={<Tables />} />
         </Route>
-      </Routes>
+      </Routes>l
     </BrowserRouter>
   )
 }

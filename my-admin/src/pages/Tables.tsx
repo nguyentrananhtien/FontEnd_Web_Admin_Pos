@@ -1,9 +1,9 @@
 import { Plus } from "lucide-react";
 import { Col, Form, Row } from "react-bootstrap";
 import { useTables } from "../hooks/useTables";
-import { TableCard } from "../components/ui/TableCard";
+import { TableCard } from "../components/ui/tables/TableCard";
 import { useState } from "react";
-import { CreateTableModal } from "../components/ui/CreateTableModal";
+import { CreateTableModal } from "../components/ui/tables/CreateTableModal";
 
 export default function Tables() {
   const { tables, uniqueAreas, filterArea, setFilterArea, reload } = useTables();

@@ -1,70 +1,118 @@
+import { useEffect, useState } from "react"
 import { DollarSign, ShoppingBag, TrendingUp, Users } from "lucide-react"
 import { Card, Col, Row } from "react-bootstrap"
+import axios from "axios"
 import RevenueChart from "../components/charts/RevenueChart"
-
-const stats = [
-  { title: 'Doanh thu', value: '₫124,500', icon: DollarSign, color: 'primary', change: '+12%' },
-  { title: 'Đơn hàng', value: '1,423', icon: ShoppingBag, color: 'success', change: '+8%' },
-  { title: 'Khách hàng', value: '8,459', icon: Users, color: 'info', change: '+23%' },
-  { title: 'Tăng trưởng', value: '24%', icon: TrendingUp, color: 'warning', change: '+5%' },
-]
+import TableRevenueChart from "../components/charts/TableRevenueChart"
+import type { ApiResponse, DashboardTodayStats, OrderItem } from "../props/statistic"
 
 export default function Dashboard() {
-  return (
-    <>
-      <h2 className="mb-4">Tổng quan</h2>
+    const [summary, setSummary] = useState({
+        totalRevenue: 0,
+        totalOrders: 0,
+        paidOrders: 0,
+        recentOrders: [] as OrderItem[]
+    });
 
-      <Row className="g-4 mb-5">
-        {stats.map((stat, i) => (
-          <Col key={i} md={6} lg={3}>
-            <Card title={stat.title}>
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex flex-wrap justify-content-center">
-                  <h2 className="mb-2 fw-bold">{stat.value}</h2>
-                  <p className={`mb-0 text-${stat.color} fw-medium`}>{stat.change} so với tháng trước</p>
-                </div>
-                <div className={`p-3 rounded-3`}>
-                  <stat.icon size={32} className={`text-${stat.color}`} />
-                </div>
-              </div>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+    useEffect(() => {
+        axios.get<ApiResponse<DashboardTodayStats>>('http://localhost:8080/api/admin/orders/statistics/today')
+            .then(res => {
+                if (res.data.success) {
+                    const stats = res.data.data;
+                    const dailyRevenue = stats.orders
+                        .filter(o => o.paymentStatus === 'paid')
+                        .reduce((sum, o) => sum + o.totalAmount, 0);
 
-      {/* Có thể thêm chart ở đây sau */}
-      <Row className="g-4">
-        <Col lg={8}>
-          <Card title="Doanh thu 12 tháng gần nhất (triệu VND)">
-            <RevenueChart />
-          </Card>
-        </Col>
-        <Col lg={4}>
-          <Card title="Đơn hàng gần đây">
-            <div className="list-group list-group-flush">
-              {[
-                { id: '#ORD-2025', customer: 'Nguyễn Văn A', amount: '₫2,350,000', status: 'success' },
-                { id: '#ORD-2024', customer: 'Trần Thị B', amount: '₫890,000', status: 'warning' },
-                { id: '#ORD-2023', customer: 'Lê Văn C', amount: '₫5,200,000', status: 'success' },
-                { id: '#ORD-2022', customer: 'Phạm D', amount: '₫420,000', status: 'danger' },
-              ].map(order => (
-                <div key={order.id} className="list-group-item d-flex flex-row justify-content-between align-items-center p-3 border-bottom">
-                  <div>
-                    <strong>{order.id}</strong>
-                    <p className="mb-0 text-muted small">{order.customer}</p>
-                  </div>
-                  <div className="text-end">
-                    <span className="fw-bold">{order.amount}</span><br />
-                    <span className={`badge bg-${order.status} bg-opacity-20 text-white text-${order.status}`}>
-                      {order.status === 'success' ? 'Đã giao' : order.status === 'warning' ? 'Đang xử lý' : 'Hủy'}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
-        </Col>
-      </Row>
-    </>
-  )
+                    setSummary({
+                        totalOrders: stats.totalOrders,
+                        paidOrders: stats.paidOrders,
+                        totalRevenue: dailyRevenue,
+                        recentOrders: stats.orders.slice(0, 5)
+                    });
+                }
+            }).catch(err => console.error(err));
+    }, []);
+
+    const stats = [
+        { title: 'Doanh thu', value: `${summary.totalRevenue.toLocaleString('vi-VN')} VNĐ`, icon: DollarSign, color: 'primary', change: 'Hôm nay' },
+        { title: 'Đơn hàng', value: summary.totalOrders.toString(), icon: ShoppingBag, color: 'success', change: `Đã trả: ${summary.paidOrders}` },
+        { title: 'Khách hàng', value: '---', icon: Users, color: 'info', change: 'Mới' },
+        { title: 'Hiệu suất', value: summary.totalOrders > 0 ? `${((summary.paidOrders / summary.totalOrders) * 100).toFixed(0)}%` : '0%', icon: TrendingUp, color: 'warning', change: 'Tỉ lệ thanh toán' },
+    ];
+
+    return (
+        <div className="p-4 bg-light min-vh-100">
+            <h2 className="mb-4 fw-bold text-uppercase text-primary">Hệ thống quản trị POS</h2>
+
+            {/* Hàng 1: Thẻ thống kê nhanh */}
+            <Row className="g-4 mb-4">
+                {stats.map((stat, i) => (
+                    <Col key={i} md={6} lg={3}>
+                        <Card className="h-100 border-0 shadow-sm">
+                            <Card.Body className="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p className="text-muted small mb-1">{stat.title}</p>
+                                    <h4 className="mb-0 fw-bold">{stat.value}</h4>
+                                    <p className={`mb-0 text-${stat.color} small mt-1`}>{stat.change}</p>
+                                </div>
+                                <div className={`p-3 rounded-circle bg-${stat.color} bg-opacity-10`}>
+                                    <stat.icon size={24} className={`text-${stat.color}`} />
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+
+            {/* Hàng 2: Doanh thu theo bàn */}
+            <Row className="mb-4">
+                <Col lg={12}>
+                    <Card className="border-0 shadow-sm p-4">
+                        <h5 className="fw-bold mb-4">Doanh thu theo bàn (Triệu VNĐ)</h5>
+                        <TableRevenueChart />
+                    </Card>
+                </Col>
+            </Row>
+
+            {/* Hàng 3: Doanh thu 12 tháng (Dưới biểu đồ bàn - Chiếm trọn chiều ngang) */}
+            <Row className="mb-4">
+                <Col lg={12}>
+                    <Card className="border-0 shadow-sm p-4">
+                        <div className="d-flex justify-content-between align-items-center mb-4">
+                            <h5 className="fw-bold mb-0">Xu hướng doanh thu 12 tháng gần nhất</h5>
+                            <span className="badge bg-primary bg-opacity-10 text-primary px-3 py-2">Đơn vị: Triệu VNĐ</span>
+                        </div>
+                        <RevenueChart />
+                    </Card>
+                </Col>
+            </Row>
+
+            {/* Hàng 4: Đơn hàng gần đây */}
+            <Row>
+                <Col lg={12}>
+                    <Card className="border-0 shadow-sm">
+                        <div className="p-4 border-bottom">
+                            <h5 className="fw-bold mb-0">Đơn hàng gần đây</h5>
+                        </div>
+                        <div className="list-group list-group-flush">
+                            {summary.recentOrders.map(order => (
+                                <div key={order.id} className="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <div>
+                                        <span className="fw-bold text-primary">#ORD-{order.id}</span>
+                                        <p className="mb-0 text-muted small">{order.paymentMethod || 'Tiền mặt'}</p>
+                                    </div>
+                                    <div className="text-end">
+                                        <span className="fw-bold d-block">{order.totalAmount.toLocaleString('vi-VN')} VNĐ</span>
+                                        <span className={`badge bg-${order.paymentStatus === 'paid' ? 'success' : 'warning'} bg-opacity-10 text-${order.paymentStatus === 'paid' ? 'success' : 'warning'}`}>
+                                            {order.paymentStatus === 'paid' ? 'Hoàn tất' : 'Đang xử lý'}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </Card>
+                </Col>
+            </Row>
+        </div>
+    )
 }
