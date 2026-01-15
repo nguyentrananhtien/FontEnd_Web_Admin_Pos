@@ -8,7 +8,7 @@ interface Props {
 
 export default function Card({ title, children, className = '' }: Props) {
   return (
-    <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 ${className}`}>
+    <div className={`bg-white rounded-lg shadow-sm border border-gray-200 ${className}`}>
       <div className="p-4 border-bottom">
         <h5 className="mb-0 fw-semibold">{title}</h5>
       </div>

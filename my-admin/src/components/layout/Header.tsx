@@ -3,7 +3,7 @@ import "../../styles/Header.css"
 export default function Header() {
   {
     return (
-      <header className="bg-white dark:bg-gray-800 shadow-sm border-bottom">
+      <header className="bg-white shadow-sm border-bottom">
         <div className="d-flex justify-content-between align-items-center p-3 px-4">
           <div className="position-relative">
             <Search className="position-absolute top-50 start-3 translate-middle-y text-muted search-icon" size={20} />

@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard'
 import Orders from './pages/Orders'
 import Tables from './pages/Tables'
 import {Dishes} from './pages/Dishes';
+import Reservations from "./pages/Reservations.tsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='dishes' element={<Dishes />} />
           <Route path='orders' element={<Orders />} />
           <Route path='tables' element={<Tables />} />
+          <Route path='reservations' element={<Reservations/>} />
         </Route>
       </Routes>l
     </BrowserRouter>

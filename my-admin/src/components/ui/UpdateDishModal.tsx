@@ -108,14 +108,13 @@ export const UpdateDishModal: React.FC<UpdateDishModalProps> = ({ isOpen, onClos
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-4xl my-8 max-h-[90vh] overflow-y-auto">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Cập nhật món ăn</h2>
+      <div className="bg-white rounded-lg p-6 w-full max-w-4xl my-8 max-h-[90vh] overflow-y-auto">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800">Cập nhật món ăn</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Basic Information */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Tên món ăn *
               </label>
               <input
@@ -123,19 +122,19 @@ export const UpdateDishModal: React.FC<UpdateDishModalProps> = ({ isOpen, onClos
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 py-2 border rounded-md"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Danh mục *
               </label>
               <select
                 required
                 value={formData.categoryId}
                 onChange={(e) => setFormData({ ...formData, categoryId: Number(e.target.value) })}
-                className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 py-2 border rounded-md"
               >
                 <option value={0}>Chọn danh mục</option>
                 {categories.map((cat: Category) => (
@@ -146,20 +145,20 @@ export const UpdateDishModal: React.FC<UpdateDishModalProps> = ({ isOpen, onClos
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Mô tả
             </label>
             <textarea
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white"
+              className="w-full px-3 py-2 border rounded-md"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Giá (VNĐ) *
               </label>
               <input
@@ -168,12 +167,12 @@ export const UpdateDishModal: React.FC<UpdateDishModalProps> = ({ isOpen, onClos
                 min={0}
                 value={formData.price}
                 onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-                className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 py-2 border rounded-md"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Thời gian chuẩn bị (phút) *
               </label>
               <input
@@ -182,18 +181,16 @@ export const UpdateDishModal: React.FC<UpdateDishModalProps> = ({ isOpen, onClos
                 min={0}
                 value={formData.preparationTime}
                 onChange={(e) => setFormData({ ...formData, preparationTime: Number(e.target.value) })}
-                className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 py-2 border rounded-md"
               />
             </div>
           </div>
 
-          {/* Image Upload */}
           <ImageUpload
             currentImage={formData.imageUrl}
             onImageChange={(base64) => setFormData({ ...formData, imageUrl: base64 })}
           />
 
-          {/* Checkboxes */}
           <div className="flex gap-6">
             <label className="flex items-center gap-2">
               <input
@@ -202,7 +199,7 @@ export const UpdateDishModal: React.FC<UpdateDishModalProps> = ({ isOpen, onClos
                 onChange={(e) => setFormData({ ...formData, isVegetarian: e.target.checked })}
                 className="rounded"
               />
-              <span className="text-sm text-gray-700 dark:text-gray-300">Món chay</span>
+              <span className="text-sm text-gray-700">Món chay</span>
             </label>
 
             <label className="flex items-center gap-2">
@@ -212,7 +209,7 @@ export const UpdateDishModal: React.FC<UpdateDishModalProps> = ({ isOpen, onClos
                 onChange={(e) => setFormData({ ...formData, isVegan: e.target.checked })}
                 className="rounded"
               />
-              <span className="text-sm text-gray-700 dark:text-gray-300">Vegan</span>
+              <span className="text-sm text-gray-700">Vegan</span>
             </label>
 
             <label className="flex items-center gap-2">
@@ -222,7 +219,7 @@ export const UpdateDishModal: React.FC<UpdateDishModalProps> = ({ isOpen, onClos
                 onChange={(e) => setFormData({ ...formData, isSpicy: e.target.checked })}
                 className="rounded"
               />
-              <span className="text-sm text-gray-700 dark:text-gray-300">Món cay</span>
+              <span className="text-sm text-gray-700">Món cay</span>
             </label>
 
             <label className="flex items-center gap-2">
@@ -232,13 +229,12 @@ export const UpdateDishModal: React.FC<UpdateDishModalProps> = ({ isOpen, onClos
                 onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
                 className="rounded"
               />
-              <span className="text-sm text-gray-700 dark:text-gray-300">Hoạt động</span>
+              <span className="text-sm text-gray-700">Hoạt động</span>
             </label>
           </div>
 
-          {/* Allergens */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Chất dị ứng
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -250,15 +246,14 @@ export const UpdateDishModal: React.FC<UpdateDishModalProps> = ({ isOpen, onClos
                     onChange={() => handleAllergenToggle(allergen.id)}
                     className="rounded"
                   />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">{allergen.name}</span>
+                  <span className="text-sm text-gray-700">{allergen.name}</span>
                 </label>
               ))}
             </div>
           </div>
 
-          {/* Ingredients */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Nguyên liệu
             </label>
             <div className="space-y-2 max-h-60 overflow-y-auto border rounded p-3">
@@ -272,7 +267,7 @@ export const UpdateDishModal: React.FC<UpdateDishModalProps> = ({ isOpen, onClos
                       onChange={() => handleIngredientToggle(ingredient.id)}
                       className="rounded"
                     />
-                    <span className="text-sm flex-1 text-gray-700 dark:text-gray-300">
+                    <span className="text-sm flex-1 text-gray-700">
                       {ingredient.name} ({ingredient.unit})
                     </span>
                     {selected && (
