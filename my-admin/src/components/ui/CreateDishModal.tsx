@@ -99,8 +99,7 @@ export const CreateDishModal: React.FC<CreateDishModalProps> = ({ isOpen, onClos
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-5xl my-8 animate-in fade-in duration-200">
-        {/* Header */}
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl my-8 animate-in fade-in duration-200">
         <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-4 rounded-t-2xl">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-bold text-white flex items-center gap-2">
@@ -122,9 +121,8 @@ export const CreateDishModal: React.FC<CreateDishModalProps> = ({ isOpen, onClos
 
         <form onSubmit={handleSubmit} className="p-6 max-h-[calc(90vh-100px)] overflow-y-auto">
           <div className="space-y-6">
-          {/* Basic Information Section */}
-          <div className="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+          <div className="bg-gray-50 rounded-xl p-5 border border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
               <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -132,7 +130,7 @@ export const CreateDishModal: React.FC<CreateDishModalProps> = ({ isOpen, onClos
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Tên món ăn <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -140,25 +138,23 @@ export const CreateDishModal: React.FC<CreateDishModalProps> = ({ isOpen, onClos
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg
                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                    dark:bg-gray-700 dark:text-white placeholder-gray-400
-                    transition-all duration-200"
+                    placeholder-gray-400 transition-all duration-200"
                   placeholder="Nhập tên món ăn..."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Danh mục <span className="text-red-500">*</span>
                 </label>
                 <select
                   required
                   value={formData.categoryId}
                   onChange={(e) => setFormData({ ...formData, categoryId: Number(e.target.value) })}
-                  className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg
                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                    dark:bg-gray-700 dark:text-white
                     transition-all duration-200"
                 >
                   <option value={0}>Chọn danh mục</option>
@@ -170,24 +166,23 @@ export const CreateDishModal: React.FC<CreateDishModalProps> = ({ isOpen, onClos
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Mô tả món ăn
               </label>
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 rows={3}
-                className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg
                   focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                  dark:bg-gray-700 dark:text-white placeholder-gray-400
-                  transition-all duration-200 resize-none"
+                  placeholder-gray-400 transition-all duration-200 resize-none"
                 placeholder="Mô tả ngắn gọn về món ăn..."
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Giá (VNĐ) <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
@@ -198,9 +193,8 @@ export const CreateDishModal: React.FC<CreateDishModalProps> = ({ isOpen, onClos
                     step={1000}
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-                    className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg
                       focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                      dark:bg-gray-700 dark:text-white
                       transition-all duration-200"
                     placeholder="0"
                   />
@@ -209,7 +203,7 @@ export const CreateDishModal: React.FC<CreateDishModalProps> = ({ isOpen, onClos
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Thời gian chuẩn bị (phút) <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
@@ -219,7 +213,7 @@ export const CreateDishModal: React.FC<CreateDishModalProps> = ({ isOpen, onClos
                     min={0}
                     value={formData.preparationTime}
                     onChange={(e) => setFormData({ ...formData, preparationTime: Number(e.target.value) })}
-                    className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg
                       focus:ring-2 focus:ring-blue-500 focus:border-transparent
                       dark:bg-gray-700 dark:text-white
                       transition-all duration-200"
