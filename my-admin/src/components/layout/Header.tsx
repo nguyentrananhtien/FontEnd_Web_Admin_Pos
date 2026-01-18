@@ -1,4 +1,4 @@
-import { Bell, Search } from "lucide-react"
+import { Search } from "lucide-react"
 import "../../styles/Header.css"
 export default function Header() {
   {
@@ -15,15 +15,9 @@ export default function Header() {
           </div>
 
           <div className="d-flex align-items-center gap-3">
-            <button className="btn btn-link position-relative">
-              <Bell size={22} />
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                3
-              </span>
-            </button>
 
             <img
-              src="https://i.pravatar.cc/40"
+              src="/src/assets/logo.png"
               alt="Admin"
               className="rounded-circle"
               width={40}
